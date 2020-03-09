@@ -31,8 +31,6 @@ function invalidID(req, res, next) {
   }
 };
 
-
-
 server.post('/api/users', reqParams, (req, res) => {
   const userInfo = req.body;
   userInfo.id = shortid.generate();
