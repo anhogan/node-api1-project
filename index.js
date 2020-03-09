@@ -38,42 +38,42 @@ server.get('/api/users', (req, res) => {
 
 server.get('/api/users/:id', (req, res) => {
   const id = req.params.id;
-  const user = users.find(user => user.id === String(id));
+  const user = users.find(user => user.id === id);
 
-  if (!user) {
+  if (user) {
+    res.status(200).json(user);
+  } else if (!user) {
     res.status(404).json({ message: "The user with the specified ID does not exist." });
   } else if (!id) {
-    res.status(500).json({ errorMessage: "The user information could not be retrieved." })
-  } else {
-    res.status(200).render(user);
+    res.status(500).json({ errorMessage: "The user information could not be retrieved." });
   };
 });
 
 server.delete('/api/users/:id', (req, res) => {
-  const id = req.params.id
-  const user = users.find(user => user.id === String(id));
+  const id = req.params.id;
+  const user = users.find(user => user.id === id);
 
-  if (!user) {
-    res.status(404).json({ message: "The user with the specified ID does not exist." });
-  } else if (!id) {
-    res.status(500).json({ errorMessage: "The user could not be removed" });
-  } else {
+  if (user) {
     delete user;
     res.status(200).json(users);
+  } else if (!user) {
+    res.status(404).json({ message: "The user with the specified ID does not exist." });
+  } else if (!id) {
+    res.status(500).json({ errorMessage: "The user could not be removed." });
   };
 });
 
 server.patch('/api/users/:id', reqParams, (req, res) => {
-  const id = req.params.id
-  const user = users.find(user => user.id === String(id));
+  const id = req.params.id;
+  const user = users.find(user => user.id === id);
 
-  if (!user) {
+  if (user) {
+    Object.assign(user, req.body);
+    res.status(200).json(user);
+  } else if (!user) {
     res.status(404).json({ message: "The user with the specified ID does not exist." });
   } else if (!id) {
     res.status(500).json({ errorMessage: "The user information could not be modified." });
-  } else {
-    Object.assign(user, req.body);
-    res.status(200).json(user);
   };
 });
 
