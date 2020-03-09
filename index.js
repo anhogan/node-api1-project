@@ -57,7 +57,7 @@ server.delete('/api/users/:id', (req, res) => {
   // Need to fix 500 status
   // Need to fix delete
   if (user) {
-    delete user;
+    users.splice(user, 1);
     res.status(200).json(users);
   } else if (!user) {
     res.status(404).json({ message: "The user with the specified ID does not exist." });
