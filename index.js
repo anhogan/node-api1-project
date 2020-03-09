@@ -40,6 +40,7 @@ server.get('/api/users/:id', (req, res) => {
   const id = req.params.id;
   const user = users.find(user => user.id === id);
 
+  // Need to fix 500 status
   if (user) {
     res.status(200).json(user);
   } else if (!user) {
@@ -53,6 +54,8 @@ server.delete('/api/users/:id', (req, res) => {
   const id = req.params.id;
   const user = users.find(user => user.id === id);
 
+  // Need to fix 500 status
+  // Need to fix delete
   if (user) {
     delete user;
     res.status(200).json(users);
@@ -67,9 +70,10 @@ server.patch('/api/users/:id', reqParams, (req, res) => {
   const id = req.params.id;
   const user = users.find(user => user.id === id);
 
+  // Need to fix 500 status
   if (user) {
     Object.assign(user, req.body);
-    res.status(200).json(user);
+    res.status(200).json(users);
   } else if (!user) {
     res.status(404).json({ message: "The user with the specified ID does not exist." });
   } else if (!id) {
