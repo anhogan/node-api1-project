@@ -25,7 +25,7 @@ server.delete('/api/users/:id', (req, res) => {
   res.status(500).json({ errorMessage: "The user could not be removed" });
 });
 
-server.put('/api/users/:id', (req, res) => {
+server.patch('/api/users/:id', (req, res) => {
   res.status(404).json({ message: "The user with the specified ID does not exist." }); // If id in req body not found
   res.status(400).json({ errorMessage: "Please provide name and bio for the user." }); // If name or bio missing from req body
   res.status(500).json({ errorMessage: "The user information could not be modified." });
